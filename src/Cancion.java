@@ -1,7 +1,11 @@
 
-public class Cancion {
+import java.io.Serializable;
+
+
+public class Cancion implements Serializable {
     String  nombre, artista, genero;
     int duración;
+     private static final long SerialVersionUID = 777L;
 
    
 
