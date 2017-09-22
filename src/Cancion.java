@@ -3,8 +3,7 @@ public class Cancion {
     String  nombre, artista, genero;
     int duración;
 
-    public Cancion() {
-    }
+   
 
     public Cancion(String nombre, String artista, String genero, int duración) {
         this.nombre = nombre;

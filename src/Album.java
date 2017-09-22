@@ -1,13 +1,14 @@
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Album {
+public class Album implements Serializable{
     String nombre, artista;
     ArrayList<Cancion> canciones = new ArrayList();
+     private static final long SerialVersionUID = 666L;
 
-    public Album() {
-    }
+    
 
     public Album(String nombre, String artista) {
         this.nombre = nombre;
