@@ -16,6 +16,11 @@ public class Cancion implements Serializable {
         this.duración = duración;
     }
 
+    public Cancion(String nombre) {
+        this.nombre = nombre;
+    }
+    
+
     public String getNombre() {
         return nombre;
     }
