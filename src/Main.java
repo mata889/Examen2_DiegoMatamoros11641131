@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -46,6 +47,8 @@ public class Main extends javax.swing.JFrame {
         jd_login = new javax.swing.JDialog();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        explorar_comboAlbum = new javax.swing.JComboBox<>();
+        jLabel24 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         crearPlaylist_nombre = new javax.swing.JTextField();
@@ -95,7 +98,7 @@ public class Main extends javax.swing.JFrame {
         tabla_albumCanciones = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        album_eliminarAlbum = new javax.swing.JButton();
         panel_usuarios = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tabla_Usuarios = new javax.swing.JTable();
@@ -244,15 +247,30 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel24.setText("Albumes");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 664, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(explorar_comboAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jLabel24)))
+                .addContainerGap(479, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel24)
+                .addGap(31, 31, 31)
+                .addComponent(explorar_comboAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(343, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Explorar", jPanel1);
@@ -291,7 +309,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(crearPlaylist_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(77, 77, 77)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Crear Playlists", jPanel2);
@@ -304,7 +322,7 @@ public class Main extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
+            .addGap(0, 427, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Ver Playlists", jPanel3);
@@ -317,7 +335,7 @@ public class Main extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
+            .addGap(0, 427, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Ver Favoritos", jPanel4);
@@ -659,8 +677,16 @@ public class Main extends javax.swing.JFrame {
         jLabel13.setText("Album Canciones");
         panel_albums.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, -1, -1));
 
-        jButton5.setText("Eliminar Album");
-        panel_albums.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, -1, -1));
+        album_eliminarAlbum.setText("Eliminar Album");
+        album_eliminarAlbum.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                album_eliminarAlbumMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                album_eliminarAlbumMouseEntered(evt);
+            }
+        });
+        panel_albums.add(album_eliminarAlbum, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, -1));
 
         panel.addTab("Albums", panel_albums);
 
@@ -1072,6 +1098,37 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4MouseClicked
 
+    private void album_eliminarAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_album_eliminarAlbumMouseClicked
+        String album = (String) album_comboBox.getSelectedItem();
+        ArrayList borrar = new ArrayList();
+        for (int i = 0; i < aa.listaalbum.size(); i++) {
+            if (aa.listaalbum.get(i).getNombre().equals(album)) {
+                for (int j = 0; j < aa.listaalbum.get(i).canciones.size(); j++) {
+                    borrar.add(aa.listaalbum.get(i).getCanciones().get(j).getNombre());
+                }
+            }
+        }
+        for (int i = 0; i < au.listausuarios.size(); i++) {
+            for (int j = 0; j < au.listausuarios.get(i).playlists.size(); j++) {
+                for (int k = 0; k < borrar.size(); k++) {
+                    if (borrar.get(k).equals(au.listausuarios.get(i).playlists.get(j).getNombre())) {
+                        au.listausuarios.get(i).playlists.remove(j);
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < aa.listaalbum.size(); i++) {
+            if (aa.listaalbum.get(i).getNombre().equals(album)) {
+               aa.listaalbum.remove(i);
+            }
+        }
+        borrar.removeAll(borrar);
+    }//GEN-LAST:event_album_eliminarAlbumMouseClicked
+
+    private void album_eliminarAlbumMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_album_eliminarAlbumMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_album_eliminarAlbumMouseEntered
+
     /**
      * @param args the command line arguments
      */
@@ -1114,6 +1171,7 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField album_artista;
     private javax.swing.JComboBox<String> album_comboBox;
+    private javax.swing.JButton album_eliminarAlbum;
     private javax.swing.JTextField album_nombre;
     private javax.swing.JButton bt_cargarUsuarios;
     private javax.swing.JButton bt_crearUsuario;
@@ -1135,11 +1193,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField crear_nombre1;
     private javax.swing.JTextField crear_usuario;
     private javax.swing.JTextField crear_usuario1;
+    private javax.swing.JComboBox<String> explorar_comboAlbum;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1156,6 +1214,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
